@@ -1,6 +1,7 @@
 package com.mmall.service.impl;
 
 import com.mmall.common.Const;
+import com.mmall.common.ResponseCode;
 import com.mmall.common.ServerResponse;
 import com.mmall.common.TokenCache;
 import com.mmall.dao.UserMapper;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Service("iUserService")
@@ -202,5 +204,20 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();
+    }
+
+    @Override
+    public ServerResponse checkLoginAndAdmin(HttpSession session){
+        //获取user对象
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        //判断是否登录
+        if (null == user){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,需要登录");
+        }
+        //判断是否是管理员
+        if (this.checkAdminRole(user).isSuccess()){
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByErrorMessage("权限不足,需要管理员权限");
     }
 }
