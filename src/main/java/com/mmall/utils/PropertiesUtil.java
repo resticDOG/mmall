@@ -17,6 +17,9 @@ public class PropertiesUtil {
 
     private static Properties props;
 
+    /**
+     * 静态代码块加载文件
+     */
     static {
         String fileName = "mmall.properties";
         props = new Properties();
@@ -35,6 +38,12 @@ public class PropertiesUtil {
         return value.trim();
     }
 
+    /**
+     * 带有默认值的方法重载
+     * @param 配置的服务器别名
+     * @param 默认的服务器地址
+     * @return 如果properties中忘了配置服务器地址，则返回默认的服务器地址
+     */
     public static String getProperty(String key,String defaultValue){
 
         String value = props.getProperty(key.trim());
@@ -43,7 +52,4 @@ public class PropertiesUtil {
         }
         return value.trim();
     }
-
-
-
 }

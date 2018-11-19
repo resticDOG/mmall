@@ -73,9 +73,9 @@ public class CategoryServiceImpl implements ICategoryService {
      * @return
      */
     @Override
-    public ServerResponse selectCategoryAndChildrenById(Integer categoryId){
+    public ServerResponse<List<Integer>> selectCategoryAndChildrenById(Integer categoryId){
         //递归算法初始化，调用时进行初始化
-        Set<Category> categorySet = Sets.newHashSet();  //瓜哇提供的方法，
+        Set<Category> categorySet = Sets.newHashSet();  //guava提供的方法，
         findChildCategory(categorySet, categoryId);
         //需要返回id的集合
         List<Integer> categoryList = Lists.newArrayList();
