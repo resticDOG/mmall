@@ -20,6 +20,13 @@ public class Const {
         int ROLE_ADMIN = 1;     //管理员
     }
 
+    public interface Cart{
+        int CHECKED = 1;        //即购物车的选中状态
+        int UN_CHECKED = 0;
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";           //给前端的提示信息，限制失败，即库存不足的时候
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";     //给前端的提示信息，限制成功，即库存充足的时候
+    }
+
     /**
      * 排序接口类
      */
