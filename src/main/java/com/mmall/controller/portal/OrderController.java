@@ -65,11 +65,12 @@ public class OrderController {
         //拿到支付宝回调的参数
         Map<String, String[]> requestParams = request.getParameterMap();
         //for循环遍历Map,用keySet方式
-        String valueStr = "";   //声明需要组装的字符串
+           //声明需要组装的字符串
         for (Iterator iterator = requestParams.keySet().iterator(); iterator.hasNext(); ){
             String name = (String) iterator.next();
             String[] values = requestParams.get(name);
             //遍历数组
+            String valueStr = "";
             for (int i = 0; i < values.length; i++){
                 //逗号隔开参数，最后一个元素后不加逗号
                 valueStr =  (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
