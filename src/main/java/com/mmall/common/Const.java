@@ -82,6 +82,18 @@ public class Const {
         public int getCode() {
             return code;
         }
+
+        /**
+         * 通过code获取value的方法
+         */
+        public static OrderStatusEnum codeOf(int code){
+            for (OrderStatusEnum orderStatusEnum : OrderStatusEnum.values()) {
+                if (orderStatusEnum.code == code){
+                    return orderStatusEnum;
+                }
+            }
+            throw new RuntimeException("没有找到对应的枚举");
+        }
     }
 
     /**
@@ -116,6 +128,42 @@ public class Const {
         public int getCode() {
             return code;
         }
+    }
+
+    /**
+     * 支付方式枚举类
+     */
+    public enum PaymentTypeEnum{
+        ONLINE_PAY(1, "在线支付");
+
+        int code;
+        String value;
+
+        PaymentTypeEnum(int code, String value) {
+            this.code = code;
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        /**
+         * 通过code获取value的方法
+         */
+        public static PaymentTypeEnum codeOf(int code){
+            for (PaymentTypeEnum paymentTypeEnum : PaymentTypeEnum.values()) {
+                if (paymentTypeEnum.code == code){
+                    return paymentTypeEnum;
+                }
+            }
+            throw new RuntimeException("没有找到对应的枚举");
+        }
+
     }
 
 }
