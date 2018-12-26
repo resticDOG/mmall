@@ -1,4 +1,4 @@
-*.class
+git *.class
 
 #package file
 *.war
