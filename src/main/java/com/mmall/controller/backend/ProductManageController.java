@@ -123,13 +123,15 @@ public class ProductManageController {
      */
     @RequestMapping(value = "/upload.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse upload(HttpSession session, @RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request){
+    public ServerResponse upload(HttpSession session,
+                                 @RequestParam(value = "upload_file", required = false) MultipartFile file,
+                                 HttpServletRequest request){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
             //获取文件servlet真实路径
             String path = request.getServletContext().getRealPath("upload");
-            String targetFileName = "img/" + iFileService.upload(file,path);
+            String targetFileName = iFileService.upload(file,path);
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
             Map<String, String> fileMap = Maps.newHashMap();
             fileMap.put("uri", targetFileName);
