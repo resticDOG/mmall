@@ -117,7 +117,7 @@ public class OrderController {
     @ResponseBody
     public ServerResponse list(HttpSession session,
                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                               @RequestParam(value = "pageNum", defaultValue = "10") Integer pageSize){
+                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         //判断登录
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null){
