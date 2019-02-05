@@ -104,7 +104,7 @@ public class ProductManageController {
     @ResponseBody
     public ServerResponse getList(HttpSession session, String productName, Integer productId,
                                   @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
+                                  @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
@@ -178,7 +178,7 @@ public class ProductManageController {
                 resultMap.put("msg", "上传失败");
                 return resultMap;
             }
-            String url = PropertiesUtil.getProperty("ftp.server.http.prefix") +"img/" + targetFileName;
+            String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
             resultMap.put("success",true);
             resultMap.put("msg", "上传成功");
             resultMap.put("file_path", url);

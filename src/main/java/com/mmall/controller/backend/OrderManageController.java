@@ -31,7 +31,7 @@ public class OrderManageController {
     @ResponseBody
     public ServerResponse list(HttpSession session,
                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                               @RequestParam(value = "pageNum", defaultValue = "10") Integer pageSize){
+                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
@@ -63,7 +63,7 @@ public class OrderManageController {
     public ServerResponse search(HttpSession session,
                                  Long orderNo,
                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-                                 @RequestParam(value = "pageNum", defaultValue = "10") Integer pageSize){
+                                 @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
