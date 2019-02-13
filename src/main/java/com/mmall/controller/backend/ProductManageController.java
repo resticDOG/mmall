@@ -70,8 +70,8 @@ public class ProductManageController {
     @RequestMapping(value = "/list.do")
     @ResponseBody
     public ServerResponse getProductList(HttpSession session,
-                                  @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
+                                  @RequestParam(value = "pageNum", defaultValue = "1", required = false) Integer pageNum,
+                                  @RequestParam(value = "pageSize", defaultValue = "10", required = false)Integer pageSize){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
@@ -104,7 +104,7 @@ public class ProductManageController {
     @ResponseBody
     public ServerResponse getList(HttpSession session, String productName, Integer productId,
                                   @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
+                                  @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize){
         //判断登录和管理员权限
         ServerResponse response = this.iUserService.checkLoginAndAdmin(session);
         if (response.isSuccess()){
@@ -132,6 +132,9 @@ public class ProductManageController {
             //获取文件servlet真实路径
             String path = request.getServletContext().getRealPath("upload");
             String targetFileName = iFileService.upload(file,path);
+            if (StringUtils.isBlank(targetFileName)){
+                return ServerResponse.createByErrorMessage("上传失败");
+            }
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
             Map<String, String> fileMap = Maps.newHashMap();
             fileMap.put("uri", targetFileName);
@@ -178,7 +181,7 @@ public class ProductManageController {
                 resultMap.put("msg", "上传失败");
                 return resultMap;
             }
-            String url = PropertiesUtil.getProperty("ftp.server.http.prefix") +"img/" + targetFileName;
+            String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
             resultMap.put("success",true);
             resultMap.put("msg", "上传成功");
             resultMap.put("file_path", url);
